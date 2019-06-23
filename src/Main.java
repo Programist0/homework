@@ -23,15 +23,13 @@ class B implements MyInterface{
 	
 }
 
-class C<K>{
-	private K m; // передать сюда Б.
+class C{
+	private MyInterface m;
 	
 	public C() {};
 	
 	public void method() {
-		System.out.println(m);
-		((MyInterface) m).g();
-		
+		m.g();
 	}
 }
 
@@ -53,21 +51,18 @@ public class Main {
 		
 		String myFileName = "C:MyInterface:B";
 		String delimiter = ":";
+		String m = Factory.getObj(myFileName,delimiter);
 		
 		C pc = new C();
 		Class myClass = pc.getClass();
 		Field f = myClass.getDeclaredField("m");
 		f.setAccessible(true);
-		
-		
-		
-		String m = Factory.getObj(myFileName,delimiter);
-		System.out.println(m);
 		f.set(pc, m);
+		
 		pc.method();
-		//создать обьект класса С
-		//изменить обьект класса С на последний элемент файла
-		//C:MyInterface:B это находиться в получаемом файле
+		//Г±Г®Г§Г¤Г ГІГј Г®ГЎГјГҐГЄГІ ГЄГ«Г Г±Г±Г  Г‘
+		//ГЁГ§Г¬ГҐГ­ГЁГІГј Г®ГЎГјГҐГЄГІ ГЄГ«Г Г±Г±Г  Г‘ Г­Г  ГЇГ®Г±Г«ГҐГ¤Г­ГЁГ© ГЅГ«ГҐГ¬ГҐГ­ГІ ГґГ Г©Г«Г 
+		//C:MyInterface:B
 		
 	}
 
